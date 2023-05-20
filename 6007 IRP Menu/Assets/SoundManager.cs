@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AudioListener.volume = volumeKnob.value;
+        //AudioListener.volume = volumeKnob.value;
     }
 
     public void PlaySound(int listNumber)
