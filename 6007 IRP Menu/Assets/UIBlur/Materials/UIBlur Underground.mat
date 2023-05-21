@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UIBlur
-  m_Shader: {fileID: 4800000, guid: 96680bfa9c0aec143a67a3dcf5bc0cca, type: 3}
+  m_Name: UIBlur Underground
+  m_Shader: {fileID: 4800000, guid: 3015ff37ebb279e40a8c4386a3ad8196, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -73,7 +73,7 @@ Material:
     - _OcclusionStrength: 1
     - _Opacity: 0.03
     - _Parallax: 0.02
-    - _Size: 1.8
+    - _Size: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

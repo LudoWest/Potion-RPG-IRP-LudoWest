@@ -24,7 +24,7 @@ public class SpringDynamics : MonoBehaviour
     private Vector2 offset = Vector2.zero;
 
     [SerializeField]
-    private float altSizeMult = 0.0f;
+    private float altSizeSum = 0.0f;
     [SerializeField]
     private bool changesSize = true;
     #endregion
@@ -46,7 +46,7 @@ public class SpringDynamics : MonoBehaviour
         //The first target is always where the UI element is first placed.
         primaryTarget = rect.anchoredPosition;
         sizeTarget = rect.sizeDelta;
-        altSizeTarget = rect.sizeDelta * altSizeMult;
+        altSizeTarget = rect.sizeDelta + altSizeSum * Vector2.one;
     }
 
     /// <summary>
@@ -82,12 +82,17 @@ public class SpringDynamics : MonoBehaviour
     }
 
     /// <summary>
-    /// This function simply makes the UI element jump upwards based on the parameter entered by changing the velocity.
+    /// This function simply makes the UI element jump sideways based on the parameter entered by changing the velocity.
     /// </summary>
     /// <param name="force"></param>
     public void ReactRight(float force)
     {
         velocity += Vector2.right * force * 250;
+    }
+
+    public void SizeReact(float force)
+    {
+        sizeVelocity += Vector2.one * force * 250;
     }
 
     /// <summary>
