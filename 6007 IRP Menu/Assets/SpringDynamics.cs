@@ -15,7 +15,7 @@ public class SpringDynamics : MonoBehaviour
     [Range(0.5f,10.0f)]
     private float spring = 2f;
     [SerializeField]
-    [Range(0.01f, 0.16f)]
+    [Range(0.01f, 0.2f)]
     private float drag = 0.06f;
 
     [SerializeField]
