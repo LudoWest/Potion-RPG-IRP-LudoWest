@@ -12,7 +12,7 @@ public class SpringDynamics : MonoBehaviour
     
     #region Variables to assign via the unity inspector [SerializeFields]
     [SerializeField]
-    [Range(0.5f,10.0f)]
+    [Range(0.25f,10.0f)]
     private float spring = 2f;
     [SerializeField]
     [Range(0.01f, 0.2f)]
@@ -22,11 +22,15 @@ public class SpringDynamics : MonoBehaviour
     private Vector2 altPos = Vector2.zero;
     [SerializeField]
     private Vector2 offset = Vector2.zero;
+    [SerializeField]
+    private float altRot = 0.0f;
 
     [SerializeField]
     private float altSizeSum = 0.0f;
     [SerializeField]
     private bool changesSize = true;
+    [SerializeField]
+    private bool changesRotation = false;
     #endregion
 
     #region Variable Declarations
@@ -34,10 +38,13 @@ public class SpringDynamics : MonoBehaviour
     private Vector2 primaryTarget;
     private Vector2 sizeTarget = Vector2.zero;
     private Vector2 altSizeTarget = Vector2.zero;
+    private float rotTarget = 0;
 
     private Vector2 velocity;
     private Vector2 sizeVelocity;
+    private float rotateVelocity;
     private Vector2 internalOffset;
+    private Vector3 currentRotation;
     #endregion
 
     #region Private Functions (Do not try to access from outside this class.)
@@ -47,6 +54,8 @@ public class SpringDynamics : MonoBehaviour
         primaryTarget = rect.anchoredPosition;
         sizeTarget = rect.sizeDelta;
         altSizeTarget = rect.sizeDelta + altSizeSum * Vector2.one;
+        rotTarget = rect.localRotation.y;
+        currentRotation = new Vector3(rect.localRotation.x, rect.localRotation.y, rect.localRotation.z);
     }
 
     /// <summary>
@@ -68,7 +77,15 @@ public class SpringDynamics : MonoBehaviour
             sizeVelocity -= sizeVelocity * drag;
             rect.sizeDelta += sizeVelocity * Time.deltaTime;
         }
-        
+
+        //Rotation
+        if (changesRotation)
+        {
+            rotateVelocity += (rotTarget - currentRotation.y) * spring * 0.04f;
+            rotateVelocity -= rotateVelocity * drag * 2;
+            currentRotation += new Vector3(0, rotateVelocity, 0);
+            rect.localRotation = Quaternion.Euler(currentRotation);
+        }
     }
     #endregion
 
@@ -117,6 +134,16 @@ public class SpringDynamics : MonoBehaviour
         Vector2 temp = sizeTarget;
         sizeTarget = altSizeTarget;
         altSizeTarget = temp;
+    }
+
+    /// <summary>
+    /// Switches current rotation target with the alternate, letting the object rotate on the Y axis.
+    /// </summary>
+    public void SwitchRot()
+    {
+        float temp = rotTarget;
+        rotTarget = altRot;
+        altRot = temp;
     }
 
     ///<summary>

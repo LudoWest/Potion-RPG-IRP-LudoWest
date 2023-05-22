@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(int listNumber)
     {
-        audioList[listNumber].pitch = Random.Range(0.5f, 1.5f);
+        audioList[listNumber].pitch = Random.Range(1.0f, 1.5f);
         audioList[listNumber].Play();
     }
 
