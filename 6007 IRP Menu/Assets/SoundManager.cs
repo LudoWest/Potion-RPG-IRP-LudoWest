@@ -42,4 +42,9 @@ public class SoundManager : MonoBehaviour
         musicPlayer.Play();
         musicPlayer.time = currentTime;
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
